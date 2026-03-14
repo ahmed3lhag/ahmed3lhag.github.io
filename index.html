@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ahmed Elhag | Mechatronics Engineer</title>
+    
+    <!-- Tailwind CSS v4 Engine -->
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    
+    <!-- Icons: FontAwesome & DevIcons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Assets -->
+    <link rel="icon" href="assets/images/logo.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script src="assets/js/preloader.js"></script>
+    <script src="assets/js/data.js" defer></script>
+    <script src="assets/js/script.js" defer></script>
+    <style>
+        .fade-in { animation: fadeIn 0.5s ease; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        /* Unified Active State for Sections */
+        .content-section { display: none !important; }
+        .content-section.active { display: block !important; animation: fadeIn 0.5s ease; }
+        
+        /* Sidebar Logo Animation: Very subtle slow drift */
+        @keyframes logoFloat {
+            0% { transform: translate(-50%, -50%) rotate(12deg) scale(1.2); }
+            50% { transform: translate(-52%, -48%) rotate(15deg) scale(1.25); }
+            100% { transform: translate(-50%, -50%) rotate(12deg) scale(1.2); }
+        }
+        .animate-logo-float {
+            animation: logoFloat 20s ease-in-out infinite;
+        }
+    </style>
+</head>
+
+<body class="text-[#d6d6d6] antialiased p-4 md:p-8">
+
+    <!-- Language Toggle Button (Floating) -->
+    <button id="lang-toggle" class="fixed top-6 left-6 z-[200] w-12 h-12 md:w-14 md:h-14 bg-[#1e1e1f]/80 backdrop-blur-xl border border-[#383838] rounded-full shadow-[0_10px_30px_-10px_rgba(0,0,0,0.5)] flex items-center justify-center hover:bg-[#383838] hover:border-[#3b82f6]/50 hover:scale-110 transition-all duration-300 group" title="Switch Language / تبديل اللغة">
+        <img src="https://img.icons8.com/color/96/google-translate.png" alt="Translate" class="w-7 h-7 md:w-9 md:h-9 group-hover:rotate-[360deg] transition-transform duration-700">
+    </button>
+
+    <!-- SIDEBAR -->
+    <aside class="relative bg-[#1e1e1f] border border-[#383838] rounded-[20px] p-5 md:p-6 lg:w-[300px] lg:fixed lg:top-8 lg:left-8 lg:bottom-8 z-50 overflow-hidden lg:overflow-visible text-center lg:text-left shadow-2xl transition-all duration-300">
+        <!-- Full-sidebar branded watermark -->
+        <div class="absolute inset-0 pointer-events-none z-0 overflow-hidden">
+            <img src="assets/images/logo.svg" alt="" class="absolute top-1/2 left-1/2 w-[150%] h-[150%] object-contain opacity-[0.03] pointer-events-none select-none animate-logo-float">
+        </div>
+
+        <!-- Header part: Image locked to left, Text coordinates with arrow -->
+        <div class="relative flex flex-row lg:flex-col items-center gap-5 lg:gap-8 z-10" dir="ltr">
+            <div class="relative bg-gradient-to-br from-[#3f3f40] to-[#121212] p-1.5 md:p-2 rounded-[20px] md:rounded-[25px] shrink-0 border border-[#383838] shadow-2xl overflow-hidden group/avatar">
+                <img id="profile-avatar" src="" alt="Ahmed Elhag" class="relative w-16 h-16 md:w-20 md:h-20 lg:w-36 lg:h-36 object-cover rounded-[15px] md:rounded-[20px] z-10 shadow-inner">
+            </div>
+            <!-- Text area: Stays 'start' aligned next to image, with right padding to avoid the arrow -->
+            <div class="flex-1 flex flex-col items-start lg:items-center ltr:text-left rtl:text-right lg:text-center pointer-events-none pr-8 lg:pr-0">
+                <h1 id="profile-name" class="text-white font-bold text-base md:text-lg lg:text-2xl tracking-tighter whitespace-nowrap">...</h1>
+                <p id="profile-title" class="bg-[#2b2b2c] text-[8px] md:text-[10px] text-white py-1.5 md:py-2 px-3 md:px-4 rounded-lg md:rounded-xl mt-1 md:mt-4 w-max font-bold uppercase tracking-widest border border-[#383838]">...</p>
+            </div>
+            <button id="toggle-info" class="lg:hidden absolute top-[-5px] right-[-5px] bg-[#1e1e1f] border border-[#383838] text-[#3b82f6] p-2 rounded-bl-xl rounded-tr-xl z-20 hover:bg-[#383838] transition-colors">
+                <i class="fas fa-chevron-down text-xs md:text-sm"></i>
+            </button>
+        </div>
+
+        <div id="sidebar-more" class="hidden lg:block animate-in fade-in slide-in-from-top-4 duration-300">
+            <!-- Normalizing spacing: my-5 matches p-5 padding for symmetry -->
+            <div class="h-px bg-[#383838] my-5 lg:my-8"></div>
+            <ul class="space-y-4 md:space-y-6" dir="ltr">
+                <li class="flex items-center gap-4 text-left group">
+                    <div class="w-10 h-10 bg-[#383838] flex items-center justify-center rounded-xl border border-[#383838] shadow-xl shrink-0 group-hover:border-[#3b82f6]/50 transition-colors">
+                        <i class="fab fa-linkedin-in text-[#3b82f6] text-sm"></i>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <p id="label-location" class="text-[8px] md:text-[10px] uppercase text-[#a8a8a8] font-bold tracking-widest">LinkedIn</p>
+                        <a id="contact-location" href="#" target="_blank" class="text-[10px] md:text-xs text-white font-medium hover:text-[#3b82f6] transition-colors truncate block">...</a>
+                    </div>
+                </li>
+                <li class="flex items-center gap-4 text-left group">
+                    <div class="w-10 h-10 bg-[#383838] flex items-center justify-center rounded-xl border border-[#383838] shadow-xl shrink-0 group-hover:border-[#3b82f6]/50 transition-colors">
+                        <i class="fas fa-envelope text-[#3b82f6] text-sm"></i>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <p id="label-email" class="text-[8px] md:text-[10px] uppercase text-[#a8a8a8] font-bold tracking-widest">Email</p>
+                        <p id="contact-email" class="text-[10px] md:text-xs text-white font-medium">...</p>
+                    </div>
+                </li>
+            </ul>
+            <div class="h-px bg-[#383838] my-4 lg:my-8"></div>
+            <div id="social-links" class="flex justify-center gap-4 md:gap-6">
+                <!-- Social links rendered by JS -->
+            </div>
+        </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="lg:ml-[332px] relative min-h-screen mt-5 lg:mt-0">
+        
+        <nav class="fixed bottom-0 left-0 w-full bg-[#2b2b2c]/95 backdrop-blur-md border-t border-[#383838] rounded-t-[20px] z-[100] 
+                   lg:absolute lg:top-0 lg:right-0 rtl:lg:right-auto rtl:lg:left-0 lg:bottom-auto lg:left-auto lg:w-max lg:rounded-tr-[20px] lg:rounded-bl-[20px] rtl:lg:rounded-tr-none rtl:lg:rounded-bl-none rtl:lg:rounded-tl-[20px] rtl:lg:rounded-br-[20px] lg:rounded-tl-none lg:rounded-br-none lg:border-t-0 lg:border-l lg:border-b rtl:lg:border-l-0 rtl:lg:border-r transition-all duration-300">
+            <ul class="flex justify-center items-center lg:px-6">
+                <li><button data-target="about" class="nav-link p-4 md:p-5 px-4 md:px-6 block text-[#3b82f6] text-[10px] md:text-[11px] font-bold uppercase tracking-widest hover:text-[#3b82f6]/80 transition-colors">About</button></li>
+                <li><button data-target="resume" class="nav-link p-4 md:p-5 px-4 md:px-6 block text-[#d6d6d6] text-[10px] md:text-[11px] font-bold uppercase tracking-widest hover:text-[#3b82f6] transition-colors">Resume</button></li>
+                <li><button data-target="portfolio" class="nav-link p-4 md:p-5 px-4 md:px-6 block text-[#d6d6d6] text-[10px] md:text-[11px] font-bold uppercase tracking-widest hover:text-[#3b82f6] transition-colors">Portfolio</button></li>
+                <li><button data-target="certificates" class="nav-link p-4 md:p-5 px-4 md:px-6 block text-[#d6d6d6] text-[10px] md:text-[11px] font-bold uppercase tracking-widest hover:text-[#3b82f6] transition-colors">Certificates</button></li>
+            </ul>
+        </nav>
+
+        <!-- About Section -->
+        <article id="about" class="content-section active bg-[#1e1e1f] border border-[#383838] rounded-[20px] p-6 md:p-10 lg:p-12 mb-20 md:mb-8 relative transition-all duration-300">
+            <header>
+                <h2 id="about-title" class="text-2xl md:text-3xl font-bold text-white mb-6 md:mb-8 relative pb-4 after:content-[''] after:absolute after:bottom-0 after:left-0 rtl:after:left-auto rtl:after:right-0 after:w-10 md:after:w-12 after:h-1.5 after:bg-[#3b82f6] after:rounded-full">عني</h2>
+            </header>
+            <section id="about-description" class="text-sm md:text-[15px] leading-relaxed md:leading-loose text-[#d6d6d6] space-y-4 md:space-y-6">
+                <!-- Description content rendered by JS -->
+            </section>
+            
+            <h3 id="services-title" class="text-xl md:text-2xl font-bold text-white mt-10 md:mt-12 mb-6 md:mb-8">What I'm Doing</h3>
+            <div id="services-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                <!-- Services rendered by JS -->
+            </div>
+        </article>
+
+        <!-- Resume Section -->
+        <article id="resume" class="content-section bg-[#1e1e1f] border border-[#383838] rounded-[20px] p-6 md:p-10 lg:p-12 mb-20 md:mb-8 relative transition-all duration-300">
+            <header>
+                <h2 id="resume-title" class="text-2xl md:text-3xl font-bold text-white mb-6 md:mb-8 relative pb-4 after:content-[''] after:absolute after:bottom-0 after:left-0 rtl:after:left-auto rtl:after:right-0 after:w-10 md:after:w-12 after:h-1.5 after:bg-[#3b82f6] after:rounded-full">Resume</h2>
+            </header>
+            <div class="space-y-12 md:space-y-16">
+                <!-- Experience -->
+                <div>
+                    <div class="flex items-center gap-4 mb-8 md:mb-10 text-white">
+                        <div class="w-10 h-10 md:w-12 md:h-12 bg-[#383838] flex items-center justify-center rounded-xl md:rounded-2xl border border-[#383838] shadow-xl text-[#3b82f6] text-lg md:text-xl"><i class="fas fa-briefcase"></i></div>
+                        <h3 id="exp-header-title" class="text-xs md:text-sm font-bold uppercase tracking-[0.2em] md:tracking-[0.3em] mb-0">Experience</h3>
+                    </div>
+                    <div id="experience-list" class="ml-5 md:ml-12 rtl:ml-0 rtl:mr-5 rtl:md:mr-12 border-l rtl:border-l-0 rtl:border-r border-[#383838] relative">
+                         <!-- Experience items rendered by JS -->
+                    </div>
+                </div>
+
+                <!-- Education -->
+                <div>
+                    <div class="flex items-center gap-4 mb-8 md:mb-10 text-white">
+                        <div class="w-10 h-10 md:w-12 md:h-12 bg-[#383838] flex items-center justify-center rounded-xl md:rounded-2xl border border-[#383838] shadow-xl text-[#3b82f6] text-lg md:text-xl"><i class="fas fa-graduation-cap"></i></div>
+                        <h3 id="edu-header-title" class="text-xs md:text-sm font-bold uppercase tracking-[0.2em] md:tracking-[0.3em] mb-0">Education</h3>
+                    </div>
+                    <div id="education-list" class="ml-5 md:ml-12 rtl:ml-0 rtl:mr-5 rtl:md:mr-12 border-l rtl:border-l-0 rtl:border-r border-[#383838] relative">
+                        <!-- Education items rendered by JS -->
+                    </div>
+                </div>
+
+                <!-- Skills -->
+                <div>
+                    <h3 id="skills-header-title" class="text-xs md:text-sm font-bold uppercase tracking-[0.2em] md:tracking-[0.3em] mb-8 md:mb-10 text-white">Technical Stack</h3>
+                    <div id="skills-grid" class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-6 md:gap-8 lg:gap-10">
+                        <!-- Skill icons rendered by JS -->
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- Portfolio Section -->
+        <article id="portfolio" class="content-section bg-[#1e1e1f] border border-[#383838] rounded-[20px] p-6 md:p-10 lg:p-12 mb-20 md:mb-8 relative transition-all duration-300">
+            <header>
+                <h2 id="portfolio-title" class="text-2xl md:text-3xl font-bold text-white mb-6 md:mb-8 relative pb-4 after:content-[''] after:absolute after:bottom-0 after:left-0 rtl:after:left-auto rtl:after:right-0 after:w-10 md:after:w-12 after:h-1.5 after:bg-[#3b82f6] after:rounded-full">Portfolio</h2>
+            </header>
+            <div id="portfolio-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+                <!-- Projects rendered by JS -->
+            </div>
+        </article>
+
+        <!-- Certificates Section -->
+        <article id="certificates" class="content-section bg-[#1e1e1f] border border-[#383838] rounded-[20px] p-6 md:p-10 lg:p-12 mb-20 md:mb-8 relative transition-all duration-300">
+            <header>
+                <h2 id="certificates-title" class="text-2xl md:text-3xl font-bold text-white mb-6 md:mb-8 relative pb-4 after:content-[''] after:absolute after:bottom-0 after:left-0 rtl:after:left-auto rtl:after:right-0 after:w-10 md:after:w-12 after:h-1.5 after:bg-[#3b82f6] after:rounded-full">Certificates</h2>
+            </header>
+            <div id="certificate-list" class="grid grid-cols-1 gap-4">
+                <!-- Certificates rendered by JS -->
+            </div>
+        </article>
+        
+        <footer class="text-center py-12">
+            <p id="footer-text" class="text-[10px] text-[#a8a8a8] uppercase tracking-[0.6em] font-bold opacity-30">
+                &copy; 2026 Ahmed Elhag &bull; Mechatronics Systems
+            </p>
+        </footer>
+    </main>
+
+</body>
+
+</html>

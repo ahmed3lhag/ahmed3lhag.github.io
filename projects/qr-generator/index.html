@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional QR Code Engine | Industrial Utility</title>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="../../assets/images/logo.svg" type="image/svg+xml">
+    <script src="../../assets/js/preloader.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <style>
+        body { font-family: 'Poppins', sans-serif; background-color: #121212; color: #d6d6d6; }
+        #qrcode img { margin: 0 auto; border-radius: 12px; }
+        .qr-gradient { background: linear-gradient(135deg, #1e1e1f 0%, #121212 100%); }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+    <main class="flex-grow flex items-center justify-center p-4">
+        <div class="bg-[#1e1e1f] border border-[#383838] p-8 rounded-[30px] w-full max-w-md shadow-2xl relative overflow-hidden">
+            <!-- Professional Badge -->
+            <div class="absolute top-0 right-0 bg-[#3b82f6]/10 px-4 py-1 rounded-bl-xl border-l border-b border-[#383838]">
+                <span class="text-[10px] text-[#3b82f6] font-bold uppercase tracking-widest">AES-Protected Generation</span>
+            </div>
+
+            <header class="text-center mb-8">
+                <div class="w-16 h-16 bg-[#3b82f6]/10 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-[#3b82f6]/20">
+                    <i class="fas fa-qrcode text-[#3b82f6] text-3xl"></i>
+                </div>
+                <h1 class="text-2xl font-bold text-white">QR Code Engine</h1>
+                <p class="text-[10px] text-[#a8a8a8] uppercase tracking-[0.2em] mt-1">Industrial Grade Engine</p>
+            </header>
+
+            <div class="space-y-6">
+                <!-- Input Area -->
+                <div class="space-y-2">
+                    <label class="text-[10px] uppercase font-bold tracking-widest text-[#a8a8a8] ml-1">Data Source</label>
+                    <div class="relative">
+                        <input type="text" id="qr-input" placeholder="Type URL or text here..." 
+                               class="w-full bg-[#121212] border border-[#383838] p-5 rounded-2xl text-white text-sm focus:border-[#3b82f6] focus:ring-1 focus:ring-[#3b82f6]/20 outline-none transition-all pr-12">
+                        <i class="fas fa-link absolute right-5 top-1/2 -translate-y-1/2 text-[#383838]"></i>
+                    </div>
+                </div>
+
+                <!-- Preview Area -->
+                <div class="qr-gradient border border-[#383838] p-6 rounded-2xl flex flex-col items-center justify-center min-h-[220px] relative">
+                    <div id="qrcode" class="p-3 bg-white rounded-xl shadow-2xl"></div>
+                    <div id="error-msg" class="hidden text-center text-red-500 space-y-2 px-4">
+                        <i class="fas fa-exclamation-triangle text-2xl"></i>
+                        <p class="text-[10px] uppercase font-bold">Input size exceeds limit</p>
+                    </div>
+                    <div id="empty-state" class="text-center space-y-2 opacity-30">
+                        <i class="fas fa-keyboard text-4xl"></i>
+                        <p class="text-[10px] uppercase font-bold tracking-tighter">Waiting for input...</p>
+                    </div>
+                </div>
+
+                <!-- Action Panel -->
+                <div class="grid grid-cols-1 gap-3">
+                    <button id="download-btn" class="w-full bg-[#3b82f6] text-white font-bold py-5 rounded-2xl shadow-xl shadow-[#3b82f6]/10 border-b-4 border-[#1e40af] hover:brightness-110 active:border-b-0 active:translate-y-1 transition-all flex items-center justify-center gap-3">
+                        <i class="fas fa-download"></i>
+                        <span>Export Industrial PNG</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="text-center py-8">
+        <p class="text-[10px] text-[#a8a8a8] uppercase tracking-[0.4em] font-bold opacity-30">© 2026 Ahmed Elhag • Mechatronics Systems</p>
+    </footer>
+
+    <!-- Professional Watermark (Massive & Centered) -->
+    <div class="fixed inset-0 flex items-center justify-center opacity-[0.04] pointer-events-none z-[0] select-none overflow-hidden">
+        <img src="../../assets/images/logo.svg" alt="" class="w-[120%] h-[120%] object-contain min-w-[800px] md:min-w-[1200px]">
+    </div>
+    <script>
+        const input = document.getElementById('qr-input');
+        const qrcodeDiv = document.getElementById('qrcode');
+        const emptyState = document.getElementById('empty-state');
+        const errorMsg = document.getElementById('error-msg');
+        const downloadBtn = document.getElementById('download-btn');
+        
+        let qrcode = new QRCode(qrcodeDiv, {
+            text: "https://ahmed.hag",
+            width: 180,
+            height: 180,
+            colorDark : "#000000",
+            colorLight : "#ffffff",
+            correctLevel : QRCode.CorrectLevel.M // Changed from H to M to handle longer text/URLs
+        });
+
+        function updateQR() {
+            const val = input.value.trim();
+            errorMsg.classList.add('hidden');
+            
+            if (val) {
+                try {
+                qrcodeDiv.classList.remove('hidden');
+                emptyState.classList.add('hidden');
+                qrcode.clear();
+                qrcode.makeCode(val);
+                } catch(e) {
+                    qrcodeDiv.classList.add('hidden');
+                    errorMsg.classList.remove('hidden');
+                    console.error("QR Code Error:", e);
+                }
+            } else {
+                qrcodeDiv.classList.add('hidden');
+                emptyState.classList.remove('hidden');
+            }
+        }
+
+        input.oninput = updateQR;
+
+        downloadBtn.onclick = () => {
+            const img = qrcodeDiv.querySelector('img');
+            if (img) {
+                const canvas = document.createElement('canvas');
+                canvas.width = 1000;
+                canvas.height = 1000;
+                const ctx = canvas.getContext('2d');
+                const tempImg = new Image();
+                tempImg.onload = () => {
+                    ctx.fillStyle = "white";
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+                    ctx.drawImage(tempImg, 50, 50, 900, 900);
+                    const link = document.createElement('a');
+                    link.href = canvas.toDataURL('image/png');
+                    link.download = `Industrial_QR_${Date.now()}.png`;
+                    link.click();
+                };
+                tempImg.src = img.src;
+            }
+        };
+
+        input.value = "https://ahmed3lhag.github.io";
+        updateQR();
+    </script>
+</body>
+</html>

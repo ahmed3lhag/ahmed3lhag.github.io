@@ -1,0 +1,7 @@
+/* Ahmed Elhag Portfolio - Main Styles */
+body { font-family: 'Poppins', sans-serif; background-color: #121212; }
+.content-section { display: none; }
+.content-section.active { display: block; }
+
+/* Tailwind Customizations (if needed) */
+input[type="range"].accent-blue { accent-color: #3b82f6; }
